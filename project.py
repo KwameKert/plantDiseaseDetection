@@ -55,7 +55,22 @@ def index():
                 );
 
 
+@app.route('/plants', methods=['GET'])
+def listAllPlants():
+    plantDetails = []
+    for idx, item in enumerate(lists):
+        plant = item.split("___");
+        detail = {"index": idx, "name": plant[0], "disease": plant[1], "remedy": remedies[idx]}
+        plantDetails.append(detail)
+    
+    return jsonify(
+        data = plantDetails,
+        status = 200
+    )
+
+
+
 if __name__ == '__main__':
     init()
-    app.run()
+    app.run(debug=True)
 
